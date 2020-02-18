@@ -2,6 +2,7 @@
 name = "helloocaml"
 version = "0.1.0"
 authors = ["blitz.whtoo <whtoo@qq.com>"]
+edition = "2018"
 
 [dependencies]
-rand = "0.3.14"
+rand = "0.5.5"
