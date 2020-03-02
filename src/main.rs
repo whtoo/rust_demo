@@ -1,27 +1,28 @@
-use std::io;
-use rand::Rng;
-use std::cmp::Ordering;
+use std::process::Command;
 
-fn main(){
-    println!("Guess the number!");
-    
-    let secret_number = rand::thread_rng().gen_range(1,101); 
-    println!("Please input your guess.");
-    loop{
-        let mut guess = String::new();
-        io::stdin().read_line(&mut guess).expect("Failed to read line");
-        let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,
-            Err(_) => continue,
-        };
-        match guess.cmp(&secret_number){
-            Ordering::Less => println!("Too smale"),
-            Ordering::Greater => println!("Too big"),
-            Ordering::Equal => {
-                println!("You win");
-                break;
+fn main() {
+    let mut cmd = Command::new("python");
+    cmd.arg("hello.py");
+
+
+    match cmd.output() {
+        Ok(out) => {
+            unsafe {
+                let out_buffer = String::from_utf8_unchecked(out.stdout);
+                println!("Output: {}",out_buffer);
             }
+        },
+        Err(e) => {
+            println!("There was an error {} ",e);
         }
     }
-    
+}
+
+#[cfg(test)]
+mod unit_tests {
+    #[test]
+    fn test_basic() {
+        assert!(1 == 1);
+        panic!("Oh no!");
+    }
 }

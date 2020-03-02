@@ -6,3 +6,5 @@ edition = "2018"
 
 [dependencies]
 rand = "0.5.5"
+actix-web = "2"
+actix-rt = "1"
